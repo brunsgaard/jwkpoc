@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"strings"
 
 	jwt "github.com/dgrijalva/jwt-go"
 	"github.com/lestrrat-go/jwx/jwk"
@@ -32,7 +33,7 @@ func getKey(token *jwt.Token) (interface{}, error) {
 
 func main() {
 	tokenbytes, _ := ioutil.ReadAll(os.Stdin)
-	token, err := jwt.Parse(string(tokenbytes), getKey)
+	token, err := jwt.Parse(strings.TrimSpace(string(tokenbytes)), getKey)
 	if err != nil {
 		panic(err)
 	}
