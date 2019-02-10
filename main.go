@@ -23,9 +23,7 @@ func getKey(token *jwt.Token) (interface{}, error) {
 	if !ok {
 		return nil, errors.New("Expecting JWT header to have string kid")
 	}
-	println(keyID)
 	key := set.LookupKeyID(keyID)
-	println(key)
 	if len(key) == 1 {
 		return key[0].Materialize()
 	}
